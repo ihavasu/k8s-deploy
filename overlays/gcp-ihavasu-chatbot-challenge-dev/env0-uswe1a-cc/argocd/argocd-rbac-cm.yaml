@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+data:
+  policy.default: role:read-only
+  policy.csv: |
+    p, role:org-admin, applications, *, *, allow
+    p, role:org-admin, repositories, *, *, allow
+    p, role:org-admin, accounts, *, *, allow
+    p, role:org-admin, certificates, *, *, allow
+    p, role:org-admin, clusters, *, *, allow
+
+    p, role:read-only, applications, get, *, allow
+    p, role:read-only, clusters, get, *, allow
+    p, role:read-only, repositories, get, *, allow
+
+    p, role:developer, applications, update, *, allow
+    p, role:developer, applications, get, *, allow
+    p, role:developer, applications, override, *, allow
+    p, role:developer, applications, sync, *, allow
+    p, role:developer, clusters, get, *, allow
+    p, role:developer, repositories, get, *, allow
+
+    g, ihavasu:cc-dev-argocd-admins, role:org-admin
+    g, ihavasu:cc-dev-argocd-developers, role:developer
+    g, ihavasu:cc-dev-argocd-guests, role:read-only

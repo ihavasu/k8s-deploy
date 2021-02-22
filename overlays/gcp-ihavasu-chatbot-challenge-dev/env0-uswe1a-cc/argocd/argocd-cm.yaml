@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  kustomize.buildOptions: --load_restrictor none
+  repositories: |
+    - url: git@github.com:ihavasu/k8s-deploy.git
+      sshPrivateKeySecret:
+        name: github-repo-deploy-key
+        key: sshPrivateKey
+  admin.enabled: "false"
+  dex.config: |
+    connectors:
+    - type: github
+      id: github
+      name: GitHub
+      config:
+        clientID: d1c327501dd67356760d
+        clientSecret: $dex.github.clientSecret
+        orgs:
+        - name: ihavasu
+  statusbadge.enabled: "true"
+  url: https://argocd.cc-dev-gcp.ihavasu.com
+  users.anonymous.enabled: "false"

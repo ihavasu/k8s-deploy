@@ -1,0 +1,7 @@
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    path: overlays/PROJECT/CLUSTER/cluster-addons/APPLICATION
+    repoURL: https://github.com/ORG/REPO
+    targetRevision: HEAD

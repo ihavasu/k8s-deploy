@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: external-dns
+  template:
+    metadata:
+      labels:
+        app: external-dns
+    spec:
+      serviceAccountName: external-dns
+      securityContext:
+        fsGroup: 65534
+        runAsUser: 65534
+      containers:
+        - name: external-dns
+          image: k8s.gcr.io/external-dns/external-dns
+          args:
+            - --source=service
+            - --source=ingress
+            - --policy=upsert-only # would prevent ExternalDNS from deleting any records, omit to enable full synchronization
+            - --registry=txt
+            #- --provider=google=SET_IN_PATCH
+            #- --txt-owner-id=SET_IN_PATCH
+            #- --domain-filter=SET_IN_PATCH

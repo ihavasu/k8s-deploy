@@ -1,0 +1,26 @@
+---
+# Source: traefik/templates/service.yaml
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: traefik
+      labels:
+        app.kubernetes.io/name: traefik
+        helm.sh/chart: traefik-9.14.3
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/instance: traefik
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: argocd.cc-dev-gcp.ihavasu.com
+    spec:
+      type: LoadBalancer
+      selector:
+        app.kubernetes.io/name: traefik
+        app.kubernetes.io/instance: traefik
+      ports:
+      - port: 443
+        name: websecure
+        targetPort: "websecure"
+        protocol: "TCP"
