@@ -1,0 +1,17 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: chatbot
+  namespace: chatbot
+spec:
+  minReplicas: 1
+  maxReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: chatbot
+  metrics:
+  - type: External
+    external:
+      targetAverageValue: 50
+      metricName: datadogmetric@chatbot:nginx-requests

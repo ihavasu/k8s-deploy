@@ -1,0 +1,6 @@
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogMetric
+metadata:
+  name: nginx-requests
+spec:
+  query: max:nginx.net.request_per_s{kube_namespace:chatbot}.rollup(60)

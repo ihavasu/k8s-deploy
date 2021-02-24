@@ -3,5 +3,5 @@ spec:
     server: https://kubernetes.default.svc
   source:
     path: overlays/PROJECT/CLUSTER/cluster-addons/APPLICATION
-    repoURL: https://github.com/ORG/REPO
+    repoURL: git@github.com:ihavasu/k8s-deploy.git
     targetRevision: HEAD

@@ -8,9 +8,13 @@ metadata:
 spec:
   destination:
     namespace: external-dns
-    server: {{ .Values.spec.destination.server }}
+    server: {{ default "https://kubernetes.default.svc" .Values.spec.destination.server }}
   project: default
   source:
     path: {{ .Values.spec.source.path }}/external-dns
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false

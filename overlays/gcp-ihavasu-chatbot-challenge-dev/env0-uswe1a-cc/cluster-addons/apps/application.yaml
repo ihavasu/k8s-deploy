@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:ihavasu/k8s-deploy
+    targetRevision: main
+    path: base/cluster-addons/apps
+    helm:
+      values: |
+        spec:
+          source:
+            path: overlays/gcp-ihavasu-chatbot-challenge-dev/env0-uswe1a-cc/cluster-addons
+            targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true

@@ -1,5 +1,8 @@
+- {op: add,  path: /spec/template/spec/containers/0/args/-, value: --metrics.datadog=true}
 - {op: add,  path: /spec/template/spec/containers/0/args/-, value: --entryPoints.web.forwardedHeaders.trustedIPs=10.42.0.0/16,10.54.0.0/16}
 - {op: add,  path: /spec/template/spec/containers/0/args/-, value: --entryPoints.websecure.forwardedHeaders.trustedIPs=10.42.0.0/16,10.54.0.0/16}
 - {op: add,  path: /spec/template/spec/containers/0/args/-, value: --certificatesResolvers.default.acme.dnschallenge.provider=gcloud}
+- {op: add,  path: /spec/template/spec/containers/0/args/-, value: --certificatesResolvers.default.acme.dnschallenge.delaybeforecheck=30}
 - {op: add,  path: /spec/template/spec/containers/0/args/-, value: --certificatesResolvers.default.acme.email=natefaerber@gmail.com}
 - {op: add,  path: /spec/template/spec/containers/0/args/-, value: --certificatesResolvers.default.acme.storage=/data/default-acme.json}
+- {op: add,  path: /spec/template/spec/containers/0/args/-, value: --certificatesResolvers.default.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory}

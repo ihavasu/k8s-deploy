@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot
+  namespace: chatbot
+  labels:
+    app: chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatbot
+  template:
+    metadata:
+      name: chatbot
+      labels:
+        app: chatbot
+    spec:
+      containers:
+      - name: chatbot
+        image: gcr.io/ihavasu-chatbot-challenge-dev/chatbot-challenge
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DD_ENV
+          value: "env0"
+        - name: DD_SERVICE
+          value: "chatbot"
+        - name: DD_VERSION
+          value: "REPLACE_ME"
+        - name: DD_LOGS_INJECTION
+          value: "true"
+        - name: DD_RUNTIME_METRICS_ENABLED
+          value: "true"
+        - name: DD_TRACE_DEBUG
+          value: "false"
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        ports:
+        - containerPort: 4444
+          protocol: TCP
+      restartPolicy: Always

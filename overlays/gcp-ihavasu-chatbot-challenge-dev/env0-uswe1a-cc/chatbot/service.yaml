@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: chatbot
+spec:
+  ports:
+  - protocol: TCP
+    port: 4444
+    name: web
+  selector:
+    app: chatbot
