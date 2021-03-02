@@ -27,6 +27,8 @@ spec:
           value: "chatbot"
         - name: DD_VERSION
           value: "snapshot"
+        - name: LOG_LEVEL
+          value: "debug"
         - name: DD_LOGS_INJECTION
           value: "true"
         - name: DD_RUNTIME_METRICS_ENABLED
